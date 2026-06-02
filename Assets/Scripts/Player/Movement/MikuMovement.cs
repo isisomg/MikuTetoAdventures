@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class MikuMovement : MonoBehaviour
 {
+
+    [SerializeField] private Animator _animator;
+
     // Initialization of components
     private Rigidbody2D mikuRigidBody;
     private BoxCollider2D mikuBoxCollider;
@@ -57,6 +60,10 @@ public class MikuMovement : MonoBehaviour
                     mikuJumpForce
                 );
         }
+
+        _animator.SetFloat("Horizontal", mikuInputHorizontal);
+        _animator.SetFloat("VerticalSpeed", mikuRigidBody.linearVelocity.y);
+        _animator.SetBool("isGrounded", isGrounded());
     }
 
     void FixedUpdate()

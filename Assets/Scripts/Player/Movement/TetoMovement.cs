@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class TetoMovement : MonoBehaviour
 {
+
+    [SerializeField] private Animator _animator;
+
     // Initialization of components
     private Rigidbody2D tetoRigidBody;
     private BoxCollider2D tetoBoxCollider;
@@ -49,7 +52,7 @@ public class TetoMovement : MonoBehaviour
 
         // Teto Jumping
         if (Keyboard.current.upArrowKey.wasPressedThisFrame &&
-        isGrounded())
+            isGrounded())
         {
             tetoRigidBody.linearVelocity =
                 new Vector2(
@@ -57,6 +60,10 @@ public class TetoMovement : MonoBehaviour
                     tetoJumpForce
                 );
         }
+
+        _animator.SetFloat("Horizontal", tetoInputHorizontal);
+        _animator.SetFloat("VerticalSpeed", tetoRigidBody.linearVelocity.y);
+        _animator.SetBool("isGrounded", isGrounded());
     }
 
     void FixedUpdate()
