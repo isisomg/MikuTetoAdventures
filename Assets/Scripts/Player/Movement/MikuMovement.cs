@@ -36,12 +36,6 @@ public class MikuMovement : MonoBehaviour
     {
         mikuInputHorizontal = 0f;
 
-        //Debug
-        if (mikuVariables.isAlive == false)
-        {
-            Debug.Log("Miku died");
-        }
-
         if (!mikuVariables.isAlive) return; // If miku is dead she wont move
 
         // Miku Horizontal Movement

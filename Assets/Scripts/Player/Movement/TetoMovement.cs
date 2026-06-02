@@ -36,12 +36,6 @@ public class TetoMovement : MonoBehaviour
     {
         tetoInputHorizontal = 0f;
 
-        //Debug
-        if (tetoVariables.isAlive == false)
-        {
-            Debug.Log("Teto died");
-        }
-
         if (!tetoVariables.isAlive) return; // If teto is dead she wont move
 
         // Teto Horizontal Movement

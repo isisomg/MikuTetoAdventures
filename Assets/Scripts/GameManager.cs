@@ -34,7 +34,7 @@ public class GameManager : MonoBehaviour
             WinGame();
         }
 
-        if (mikuVariables.isAlive == false || tetoVariables.isAlive == false)
+        if (mikuVariables.isAlive == false | tetoVariables.isAlive == false)
         {
             LoseGame();
         }
