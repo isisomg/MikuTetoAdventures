@@ -5,7 +5,7 @@ public class StartMenuController : MonoBehaviour
 {
     public void OnStartClick()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("DebugLevel");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Tutorial");
     }
     public void OnExitClick()
     {
