@@ -13,6 +13,11 @@ public class GameManager : MonoBehaviour
 
     public GameObject winScreen;
 
+    private AudioSource audioSource;
+
+    public AudioClip firstClip;
+    public AudioClip secondClip;
+
     private bool hasWon = false;
     private bool hasLost = false;
     void WinGame()
@@ -22,6 +27,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("You Win!");
 
         winScreen.SetActive(true);
+
+        audioSource = winScreen.GetComponent<AudioSource>();
+
+        audioSource.PlayOneShot(firstClip);
+        audioSource.PlayOneShot(secondClip);
 
         Time.timeScale = 0f; // pauses the game
     }
