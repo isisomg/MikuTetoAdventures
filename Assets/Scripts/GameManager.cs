@@ -1,10 +1,17 @@
+using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
 
     public MikuVariables mikuVariables;
     public TetoVariables tetoVariables;
+
+    public GameObject gameOverScreen;
+    public TMP_Text deadChar;
+
+    public GameObject winScreen;
 
     private bool hasWon = false;
     private bool hasLost = false;
@@ -14,14 +21,46 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("You Win!");
 
+        winScreen.SetActive(true);
+
         Time.timeScale = 0f; // pauses the game
     }
 
     void LoseGame()
     {
-        hasLost = true;
+        gameOverScreen.SetActive(true);
+        deadChar.text = mikuVariables.isAlive == false ? "Miku is dead!" : "Teto is dead!";
+    }
 
-        Debug.Log("You Lose!");
+    public void ResetLevel()
+    {
+        Debug.Log("Trying to reset level...");
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+        gameOverScreen.SetActive(false);
+    }
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene("StartScene");
+        gameOverScreen.SetActive(false);
+    }
+
+    public void GoToNextLevel()
+    {
+        winScreen.SetActive(false);
+        Time.timeScale = 1f;
+
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.LogWarning("No more levels in Build Settings! Going to main menu instead.");
+            GoToMainMenu();
+        }
     }
 
     // Update is called once per frame
@@ -40,5 +79,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        winScreen.SetActive(false);
+        gameOverScreen.SetActive(false);
+    }
 
 }
