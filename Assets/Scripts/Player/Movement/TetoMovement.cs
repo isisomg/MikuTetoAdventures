@@ -66,6 +66,7 @@ public class TetoMovement : MonoBehaviour
         _animator.SetBool("isGrounded", isGrounded());
     }
 
+    // FixedUpdate is called at a fixed interval and is independent of frame rate. So the walk speed will be consistent across different frame rates and wont be all choppy and weird
     void FixedUpdate()
     {
         tetoRigidBody.linearVelocity =
@@ -75,6 +76,7 @@ public class TetoMovement : MonoBehaviour
 
     // GroundCheck
     // Tutorial used: https://www.youtube.com/watch?v=P_6W-36QfLA
+    // Draws Lines below Teto to check for the ground, if it hits the ground it returns true and if it doesn't it returns false.
     public bool isGrounded()    // Check to see if teto is coliding with the ground, used to limit jumps and whatnot.
     {
         if (Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, castDistance, groundLayer))
